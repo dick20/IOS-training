@@ -2,14 +2,6 @@
 中山大学IOS实训项目
 
 
-//
-//  FileExploreViewController.m
-//  FileExplore
-//
-//  Created by zhangtianfu on 2019/3/22.
-//  Copyright © 2019 zhangtianfu. All rights reserved.
-//
-
 #import "FileExploreViewController.h"
 #import "FileInfoViewController.h"
 
