@@ -2,87 +2,62 @@
 中山大学IOS实训项目
 
 
-#import "FileExploreViewController.h"
-#import "FileInfoViewController.h"
+//
+//  infoModifiedViewController.h
+//  IM
+//
+//  Created by student7 on 2019/5/18.
+//  Copyright © 2019 zhulinyin. All rights reserved.
+//
 
-@interface FileExploreViewController ()<UITableViewDelegate, UITableViewDataSource>
+#ifndef infoModifiedViewController_h
+#define infoModifiedViewController_h
 
-@property(nonatomic, strong) UITableView *tableView;
+#import <UIKit/UIKit.h>
 
-@property(nonatomic, strong) NSMutableArray<NSString*> *titleList;
-@property(nonatomic, strong) NSMutableArray<NSString*> *contentList;
+@interface InfoModifiedViewController : UIViewController
+
 
 @end
 
-@implementation FileExploreViewController
+#endif /* infoModifiedViewController_h */
 
-- (instancetype)init {
+
+
+
+//
+//  infoModifiedViewController.m
+//  IM
+//
+//  Created by student7 on 2019/5/18.
+//  Copyright © 2019 zhulinyin. All rights reserved.
+//
+
+#import "InfoModifiedViewController.h"
+
+@interface InfoModifiedViewController.h ()
+@property (weak, nonatomic) UITextField *editText; // 修改的输入文本框
+@property (weak, nonatomic) NSString *titleText; // 页面的标题item
+
+@end
+
+@implementation InfoModifiedViewController
+
+- (instancetype) initWithString : str{
+    self.titleText = str;
     return self;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationItem.title = @"个人信息";
+    self.editText = [[UITextField alloc]initWithFrame:CGRectMake(100, 100, 100, 100)];
+}
+/*
+ 登录功能
+ */
+- (IBAction)loginEvent:(id)sender {
     
-    self.tableView = ({
-    ​    UITableView *tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
-    ​    tableView.delegate = self;
-    ​    tableView.dataSource = self;
-    ​    tableView;
-    });
-    [self.view addSubview:self.tableView];
-    
-    [self loadData];
 }
-
-- (void)loadData {
-    self.contentList = [NSMutableArray array];
-    [self.contentList addObjectsFromArray:[[NSArray alloc] initWithObjects:@"头像", @"昵称", @"账号", @"性别", @"地区",nil]];
-    self.titleList = [NSMutableArray array];
-    [self.titleList addObjectsFromArray:[[NSArray alloc] initWithObjects:@"小猪佩奇", @"Peppa", @"peppy", @"female", @"UK",nil]];
-
-}
-
-#pragma mark ------------ UITableViewDataSource ------------------
-
-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-return 1;
-}
-
-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-return self.contentList.count;
-}
-
-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-NSString *cellID = [NSString stringWithFormat:@"cellID:%zd", indexPath.section];
-UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
-if (nil == cell) {
-​    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
-}
-
-
-//        cell.imageView.image = [UIImage imageNamed:@"icon_directory.jpg"];
-cell.textLabel.text = self.contentList[indexPath.row];
-
-UILabel *rightLabel = [[UILabel alloc]initWithFrame:CGRectMake(0,0,70,45)];
-rightLabel.text = self.titleList[indexPath.row];
-cell.accessoryView = rightLabel;
-cell.accessoryView.backgroundColor = [UIColor redColor];   //加上红色容易看清楚
-
-cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-return cell;
-}
-
-#pragma mark ------------ UITableViewDelegate ------------------
-
-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-[tableView deselectRowAtIndexPath:indexPath animated:YES];
-
-FileExploreViewController *controller = [[FileExploreViewController alloc] init];
-controller.hidesBottomBarWhenPushed = YES;
-[self.navigationController pushViewController:controller animated:YES];
-}
-
 
 @end
